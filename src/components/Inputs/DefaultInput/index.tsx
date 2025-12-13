@@ -14,7 +14,7 @@ export const DefaultInput = React.forwardRef<
   HTMLInputElement,
   DefaultInputProps
 >(({ isPassword, inputLabel, className, error, ...props }, ref) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useSafeState(false)
+  const [isTextVisible, setIsTextVisible] = useSafeState(!isPassword)
 
   return (
     <div className="flex flex-col gap-2">
@@ -30,12 +30,12 @@ export const DefaultInput = React.forwardRef<
           className={
             'w-full border-none bg-transparent text-[1.11rem] text-[#C9C9C9] outline-none ring-0 placeholder:text-[1.11rem] placeholder:text-[#C9C9C9] focus:ring-0'
           }
-          type={isPasswordVisible ? 'text' : 'password'}
+          type={isTextVisible ? 'text' : 'password'}
         />
         {isPassword && (
           <button
             type="button"
-            onClick={() => setIsPasswordVisible((prev) => !prev)}
+            onClick={() => setIsTextVisible((prev) => !prev)}
           >
             <PasswordIcon />
           </button>
