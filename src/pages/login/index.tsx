@@ -4,6 +4,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSafeState } from '../hooks/useSafeState'
+import NextImage from 'next/image'
+import LoginBackground from '@/assets/images/login-bg.png'
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Email inválido' }),
@@ -30,7 +32,7 @@ export default function Login() {
 
   return (
     <div className="grid grid-cols-2">
-      <div className="flex h-[100vh] w-full flex-col gap-16 pl-24 pt-[3.25rem]">
+      <div className="flex h-[100vh] w-full flex-col gap-16 pl-24 pr-10 pt-[3.25rem]">
         <NortusIcon />
         <div>
           <h2 className="text-[2.23rem] font-normal leading-[2.86rem] text-text">
@@ -58,7 +60,7 @@ export default function Login() {
                   id="remember"
                   type="checkbox"
                   checked={shouldRememberUser}
-                  onClick={() => setShouldRememberUser((prev) => !prev)}
+                  onChange={() => setShouldRememberUser((prev) => !prev)}
                 />
                 <label htmlFor="remember" className="font-grotesk text-t3">
                   Lembrar meu usuário
@@ -77,6 +79,16 @@ export default function Login() {
               Entrar
             </button>
           </FormProvider>
+        </div>
+      </div>
+      <div className="h-screen p-10">
+        <div className="relative h-full w-full">
+          <NextImage
+            src={LoginBackground}
+            alt="Login Background"
+            layout="fill"
+            objectFit="contain"
+          />
         </div>
       </div>
     </div>
