@@ -5,12 +5,14 @@ import { DefaultInput, DefaultInputProps } from '.'
 interface DefaultInputFormProps extends Omit<DefaultInputProps, 'value'> {
   name: string
   nextFocus?: string
+  className?: string
 }
 
 export const DefaultInputForm: React.FC<DefaultInputFormProps> = ({
   name,
   nextFocus,
   onChange: onChangeText,
+  className,
   ...rest
 }) => {
   const {
@@ -31,6 +33,7 @@ export const DefaultInputForm: React.FC<DefaultInputFormProps> = ({
             onChangeText?.(text)
           }}
           value={value}
+          className={className}
           error={errors[name]?.message as string}
           onSubmit={nextFocus ? () => setFocus(nextFocus) : undefined}
           {...rest}

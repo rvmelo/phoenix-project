@@ -5,12 +5,14 @@ import { ModalInput, ModalInputProps } from '.'
 interface ModalInputFormProps extends Omit<ModalInputProps, 'value'> {
   name: string
   nextFocus?: string
+  className?: string
 }
 
 export const ModalInputForm: React.FC<ModalInputFormProps> = ({
   name,
   nextFocus,
   onChange: onChangeText,
+  className,
   ...rest
 }) => {
   const {
@@ -31,6 +33,7 @@ export const ModalInputForm: React.FC<ModalInputFormProps> = ({
             onChangeText?.(text)
           }}
           value={value}
+          className={className}
           error={errors[name]?.message as string}
           onSubmit={nextFocus ? () => setFocus(nextFocus) : undefined}
           {...rest}

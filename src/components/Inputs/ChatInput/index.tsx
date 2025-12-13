@@ -1,15 +1,23 @@
 import React, { InputHTMLAttributes } from 'react'
 import SendIcon from '@/assets/svg/send-icon.svg'
+import { customTwMerge } from '@/utils/customTwMerge'
 
 interface ChatInputProps extends InputHTMLAttributes<HTMLInputElement> {
   onclick?: React.MouseEventHandler<HTMLButtonElement>
+  className?: string
 }
 
-export const ChatInput: React.FC<ChatInputProps> = ({ onclick, ...props }) => {
+export const ChatInput: React.FC<ChatInputProps> = ({
+  onclick,
+  className,
+  ...props
+}) => {
   return (
     <div
-      className="flex w-full max-w-[58.875rem]  flex-row items-center justify-between rounded-[6.25rem] border-[1px] border-white px-[1.33rem] py-4
-    "
+      className={customTwMerge(
+        'flex w-full max-w-[58.875rem]  flex-row items-center justify-between rounded-[6.25rem] border-[1px] border-white px-[1.33rem] py-4',
+        className,
+      )}
     >
       <input
         {...props}

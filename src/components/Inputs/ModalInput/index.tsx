@@ -1,3 +1,4 @@
+import { customTwMerge } from '@/utils/customTwMerge'
 import React, { InputHTMLAttributes } from 'react'
 
 export interface ModalInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,12 +8,17 @@ export interface ModalInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const ModalInput = React.forwardRef<HTMLInputElement, ModalInputProps>(
   ({ className, error, ...props }, ref) => {
     return (
-      <div className="w-full max-w-[32.125rem] rounded-3xl border-[1px] border-white px-6 py-[17px]">
+      <div
+        className={customTwMerge(
+          'w-full max-w-[32.125rem] rounded-3xl border-[1px] border-white px-6 py-[17px]',
+          className,
+        )}
+      >
         <input
           ref={ref}
-          className={`border-none bg-transparent outline-none ring-0 focus:ring-0 ${
-            className ?? ''
-          }`}
+          className={
+            'border-none bg-transparent outline-none ring-0 focus:ring-0'
+          }
           {...props}
         />
         {error && (
