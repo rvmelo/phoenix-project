@@ -24,7 +24,7 @@ export const DefaultInput = React.forwardRef<
         ref={ref}
         {...props}
         className={
-          'border-none bg-transparent outline-none ring-0 focus:ring-0'
+          'border-none bg-transparent text-[1.11rem] text-[#C9C9C9] outline-none ring-0 placeholder:text-[1.11rem] placeholder:text-[#C9C9C9] focus:ring-0'
         }
       />
       {isPassword && <PasswordIcon />}

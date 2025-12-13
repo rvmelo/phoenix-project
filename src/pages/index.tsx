@@ -7,9 +7,9 @@ export default function Home() {
     <div>
       <h1>Next.js</h1>
       <button>Click me</button>
-      <DefaultInput />
-      <ModalInput />
-      <ChatInput />
+      <DefaultInput placeholder="Placeholder" />
+      <ModalInput placeholder="Placeholder" />
+      <ChatInput placeholder="Placeholder" />
     </div>
   )
 }

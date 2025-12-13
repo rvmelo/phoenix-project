@@ -21,7 +21,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     >
       <input
         {...props}
-        className="border-none bg-transparent outline-none ring-0 focus:ring-0"
+        className="border-none bg-transparent text-[1.11rem] text-[#EFF6FF] outline-none ring-0 placeholder:text-[1.11rem] placeholder:text-[#EFF6FF] focus:ring-0"
       />
       <button
         className="flex h-10 w-10 items-center justify-center rounded-full bg-primary"

@@ -17,7 +17,7 @@ export const ModalInput = React.forwardRef<HTMLInputElement, ModalInputProps>(
         <input
           ref={ref}
           className={
-            'border-none bg-transparent outline-none ring-0 focus:ring-0'
+            'border-none bg-transparent text-t1 text-[#FBFBFB80] outline-none ring-0 placeholder:text-t1 placeholder:text-[#FBFBFB80] focus:ring-0'
           }
           {...props}
         />
