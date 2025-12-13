@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const plugin = require('tailwindcss/plugin')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
+      transparent: 'transparent',
       background: '#0B1125',
       text: '#E3E3E3',
       primary: '#1876D2',

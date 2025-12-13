@@ -10,12 +10,16 @@
     "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "next": "12.3.0",
     "react": "^18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.55.0",
+    "zod": "^3.23.4"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.2.0",
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
