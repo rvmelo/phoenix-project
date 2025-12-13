@@ -1,14 +1,28 @@
 import React, { InputHTMLAttributes } from 'react'
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>
-
-export const ModalInput: React.FC<InputProps> = ({ ...props }) => {
-  return (
-    <div className="w-full max-w-[32.125rem] rounded-3xl border-[1px] border-white px-6 py-[17px]">
-      <input
-        className="border-none bg-transparent outline-none ring-0 focus:ring-0"
-        {...props}
-      />
-    </div>
-  )
+export interface ModalInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  error?: string
 }
+
+export const ModalInput = React.forwardRef<HTMLInputElement, ModalInputProps>(
+  ({ className, error, ...props }, ref) => {
+    return (
+      <div className="w-full max-w-[32.125rem] rounded-3xl border-[1px] border-white px-6 py-[17px]">
+        <input
+          ref={ref}
+          className={`border-none bg-transparent outline-none ring-0 focus:ring-0 ${
+            className ?? ''
+          }`}
+          {...props}
+        />
+        {error && (
+          <span className="font-weight-400 font-inter text-t1 text-error2">
+            {error}
+          </span>
+        )}
+      </div>
+    )
+  },
+)
+
+ModalInput.displayName = 'ModalInput'
