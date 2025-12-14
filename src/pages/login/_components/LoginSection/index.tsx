@@ -43,7 +43,6 @@ export const LoginSection: React.FC = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      console.log(data)
       if (data.email && data.password) {
         await axios.post('/api/auth', data)
         toast.success('Login realizado com sucesso')
