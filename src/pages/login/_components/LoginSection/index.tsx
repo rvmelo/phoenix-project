@@ -5,17 +5,34 @@ import { FormProvider, useForm } from 'react-hook-form'
 import NortusIcon from '@/assets/svg/nortus-icon.svg'
 import { DefaultInputForm } from '@/components/Inputs/DefaultInput/form'
 import { useSafeState } from '@/pages/hooks/useSafeState'
+import { useRouter } from 'next/router'
+import axios from 'axios'
+import { StorageKeys } from '@/pages/enums/storageKeys'
 
 const loginSchema = z.object({
-  email: z.string().email({ message: 'Email inválido' }),
-  password: z.string().min(8, { message: 'Senha inválida' }),
+  email: z
+    .string()
+    .nonempty({ message: 'Email é obrigatório' })
+    .email({ message: 'Email inválido' }),
+  password: z
+    .string()
+    .nonempty({ message: 'Senha é obrigatória' })
+    .min(6, { message: 'Senha inválida' }),
 })
 
 export const LoginSection: React.FC = () => {
   const [shouldRememberUser, setShouldRememberUser] = useSafeState(false)
 
-  const methods = useForm({
+  const router = useRouter()
+
+  type LoginFormData = z.infer<typeof loginSchema>
+
+  const methods = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: localStorage.getItem(StorageKeys.EMAIL) || '',
+      password: '',
+    },
   })
 
   const {
@@ -23,10 +40,21 @@ export const LoginSection: React.FC = () => {
     formState: { isSubmitting },
   } = methods
 
-  type LoginFormData = z.infer<typeof loginSchema>
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      console.log(data)
+      if (data.email && data.password) {
+        await axios.post('/api/auth', data)
+      }
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data)
+      if (shouldRememberUser) {
+        localStorage.setItem(StorageKeys.EMAIL, data.email)
+      }
+
+      router.replace('/dashboard')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
