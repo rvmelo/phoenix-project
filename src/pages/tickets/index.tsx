@@ -28,7 +28,7 @@ export default function Tickets({
       <div className="grid min-h-screen grid-cols-[9.375rem_1fr] grid-rows-[auto_1fr]">
         <aside className="row-span-2"></aside>
         <header className="h-[5.5rem] w-full"></header>
-        <main className="flex flex-col items-center justify-center  pb-8 pt-14">
+        <main className="flex flex-col items-center justify-center pb-8 pt-14">
           <div className="flex flex-col gap-10">
             <div className="flex w-full flex-row justify-between">
               <InfoCard type="ticket" value={openCount} />
