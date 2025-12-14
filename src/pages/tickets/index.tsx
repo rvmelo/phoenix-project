@@ -4,6 +4,7 @@ import { InfoCard } from './_components/InfoCard'
 import { GetServerSideProps } from 'next'
 import { getTicketsService, TicketItem } from '@/services/getTicketsService'
 import { parse } from 'cookie'
+import { TicketsTable } from './_components/TicketsTable'
 
 type TicketsPageProps = {
   openCount: number
@@ -18,6 +19,7 @@ export default function Tickets({
   progressCount,
   closedCount,
   averageDurationHours,
+  tickets,
 }: TicketsPageProps) {
   return (
     <>
@@ -26,12 +28,20 @@ export default function Tickets({
       <div className="grid min-h-screen grid-cols-[9.375rem_1fr] grid-rows-[auto_1fr]">
         <aside className="row-span-2"></aside>
         <header className="h-[5.5rem] w-full"></header>
-        <main className="flex flex-col justify-center">
-          <div className="flex flex-row justify-center gap-6">
-            <InfoCard type="ticket" value={openCount} />
-            <InfoCard type="progress" value={progressCount} />
-            <InfoCard type="solved" value={closedCount} />
-            <InfoCard type="time" value={averageDurationHours} />
+        <main className="flex flex-col items-center justify-center  pb-8 pt-14">
+          <div className="flex flex-col gap-10">
+            <div className="flex w-full flex-row justify-between">
+              <InfoCard type="ticket" value={openCount} />
+              <InfoCard type="progress" value={progressCount} />
+              <InfoCard type="solved" value={closedCount} />
+              <InfoCard type="time" value={averageDurationHours} />
+            </div>
+            <div className="flex flex-col gap-4 rounded-3xl bg-[linear-gradient(135deg,#1F2A44,#141C2F)] px-4 pb-4 pt-10">
+              <h2 className="font-montserrat text-s1 text-white">
+                Lista de Tickets
+              </h2>
+              <TicketsTable data={tickets} />
+            </div>
           </div>
         </main>
       </div>

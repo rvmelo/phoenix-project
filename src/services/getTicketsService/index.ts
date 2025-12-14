@@ -2,7 +2,9 @@ import { api } from '..'
 
 export type TicketItem = {
   id: string
+  ticketId: string
   client: string
+  priority: 'Urgente' | 'Média' | 'Baixa'
   email: string
   subject: string
   status: 'Aberto' | 'Em andamento' | 'Fechado'
