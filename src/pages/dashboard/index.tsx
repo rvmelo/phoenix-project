@@ -7,6 +7,7 @@ import {
   type GetKPISServiceResponseDTO,
 } from '@/services/getKPISService'
 import { KPISChart } from './_components/KPISChart'
+import { ConversionRateChart } from './_components/ConversionRateChart'
 
 type DashboardPageProps = {
   kpis: GetKPISServiceResponseDTO
@@ -22,8 +23,11 @@ export default function Dashboard({ kpis }: DashboardPageProps) {
           <aside className="row-span-2"></aside>
           <header className="h-[5.5rem] w-full"></header>
           <main className="flex flex-col items-center">
-            <div className="flex w-full flex-row justify-center pb-8 pt-14">
+            <div className="flex w-full flex-row justify-center gap-10 px-10 pt-14">
               <KPISChart kpis={kpis} />
+              <ConversionRateChart
+                conversionRateValues={kpis.kpisTrend.conversionTrend.data}
+              />
             </div>
           </main>
         </div>
