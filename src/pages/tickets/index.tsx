@@ -1,8 +1,24 @@
 import { UserSideBar } from '@/components/UserSideBar'
 import { UserTopBar } from '@/components/UserTopBar'
 import { InfoCard } from './_components/InfoCard'
+import { GetServerSideProps } from 'next'
+import { getTicketsService, TicketItem } from '@/services/getTicketsService'
+import { parse } from 'cookie'
 
-export default function Tickets() {
+type TicketsPageProps = {
+  openCount: number
+  progressCount: number
+  closedCount: number
+  tickets: TicketItem[]
+  averageDurationHours: number
+}
+
+export default function Tickets({
+  openCount,
+  progressCount,
+  closedCount,
+  averageDurationHours,
+}: TicketsPageProps) {
   return (
     <>
       <UserSideBar />
@@ -12,13 +28,60 @@ export default function Tickets() {
         <header className="h-[5.5rem] w-full"></header>
         <main className="flex flex-col justify-center">
           <div className="flex flex-row justify-center gap-6">
-            <InfoCard type="ticket" />
-            <InfoCard type="progress" />
-            <InfoCard type="solved" />
-            <InfoCard type="time" />
+            <InfoCard type="ticket" value={openCount} />
+            <InfoCard type="progress" value={progressCount} />
+            <InfoCard type="solved" value={closedCount} />
+            <InfoCard type="time" value={averageDurationHours} />
           </div>
         </main>
       </div>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const cookies = parse(req.headers.cookie || '')
+  const accessToken = cookies.access_token || ''
+
+  // Opcional: redirecionar se não estiver autenticado
+  if (!accessToken) {
+    return {
+      redirect: { destination: '/login', permanent: false },
+    }
+  }
+
+  const { data: tickets } = await getTicketsService(accessToken)
+
+  const openCount = tickets.filter((t) => t.status === 'Aberto').length
+  const progressCount = tickets.filter(
+    (t) => t.status === 'Em andamento',
+  ).length
+  const closedCount = tickets.filter((t) => t.status === 'Fechado').length
+
+  const closedTickets = tickets.filter((t) => t.status === 'Fechado')
+  const averageDurationHours =
+    closedTickets.length > 0
+      ? Number(
+          (
+            closedTickets.reduce((acc, t) => {
+              const created = new Date(t.createdAt).getTime()
+              const updated = new Date(t.updatedAt).getTime()
+              const diffMs = Math.max(0, updated - created)
+              return acc + diffMs
+            }, 0) /
+            closedTickets.length /
+            3600000
+          ).toFixed(1),
+        )
+      : 0
+
+  return {
+    props: {
+      tickets: tickets.slice(0, 5),
+      openCount,
+      progressCount,
+      closedCount,
+      averageDurationHours,
+    },
+  }
 }
