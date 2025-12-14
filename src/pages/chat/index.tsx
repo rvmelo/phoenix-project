@@ -1,11 +1,11 @@
 import { UserSideBar } from '@/components/UserSideBar'
 import { UserTopBar } from '@/components/UserTopBar'
 
-export default function Dashboard() {
+export default function Chat() {
   return (
     <div>
       <UserSideBar />
-      <UserTopBar sectionTitle="Dashboard" />
+      <UserTopBar sectionTitle="Chat & Assistente Virtual" />
     </div>
   )
 }
