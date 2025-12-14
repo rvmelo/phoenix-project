@@ -8,6 +8,7 @@ import { useSafeState } from '@/pages/hooks/useSafeState'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { StorageKeys } from '@/pages/enums/storageKeys'
+import { toast } from 'sonner'
 
 const loginSchema = z.object({
   email: z
@@ -45,6 +46,7 @@ export const LoginSection: React.FC = () => {
       console.log(data)
       if (data.email && data.password) {
         await axios.post('/api/auth', data)
+        toast.success('Login realizado com sucesso')
       }
 
       if (shouldRememberUser) {
@@ -53,7 +55,7 @@ export const LoginSection: React.FC = () => {
 
       router.replace('/dashboard')
     } catch (error) {
-      console.error(error)
+      toast.error('Erro ao realizar login')
     }
   }
 
