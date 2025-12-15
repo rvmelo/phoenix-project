@@ -1,6 +1,9 @@
 import React from 'react'
 import CloseIcon from '@/assets/svg/close-icon.svg'
 import { ModalInput } from '@/components/Inputs/ModalInput'
+import { Dropdown } from '@/components/DropDown'
+import { useSafeState } from '@/pages/hooks/useSafeState'
+import DropdownArrowIcon from '@/assets/svg/dropdown-arrow-icon.svg'
 
 interface TicketModalProps {
   onClose: () => void
@@ -11,6 +14,10 @@ export const TicketModal: React.FC<TicketModalProps> = ({
   onClose,
   onSubmit,
 }) => {
+  const [priority, setPriority] = useSafeState<'Urgente' | 'Média' | 'Baixa'>(
+    'Urgente',
+  )
+
   return (
     <div className="bg-black fixed inset-0 z-[999]  flex items-start justify-center overflow-y-auto  bg-background bg-opacity-50 py-6">
       <div className="ml-[9.375rem] rounded-2xl bg-background px-6 pb-6 pt-8">
@@ -38,9 +45,31 @@ export const TicketModal: React.FC<TicketModalProps> = ({
             inputLabel="Email"
             placeholder="E-mail de contato para atualizações e resposta"
           />
-          <ModalInput
-            inputLabel="Prioridade"
-            placeholder="Selecione o nível de urgência do atendimento"
+          <Dropdown
+            options={[
+              { value: 'Urgente', label: 'Urgente' },
+              { value: 'Média', label: 'Média' },
+              { value: 'Baixa', label: 'Baixa' },
+            ]}
+            value={priority}
+            setValue={(value) =>
+              setPriority(value as 'Urgente' | 'Média' | 'Baixa')
+            }
+            dropDownContentPosition="popper"
+            trigger={
+              <div className="flex w-full max-w-[32.125rem] flex-col gap-3">
+                <span className="ml-4 font-grotesk text-[1rem] text-t1 font-normal text-[#F6F8FC]">
+                  Prioridade
+                </span>
+                <button
+                  type="button"
+                  className="flex w-full max-w-[32.125rem] flex-row items-center justify-between rounded-3xl border-[1px] border-[#FFFFFF1A] bg-[#FFFFFF0D] px-6 py-[17px] text-left text-t1 text-[#FBFBFB80]"
+                >
+                  Selecione o nível de urgência do atendimento
+                  <DropdownArrowIcon />
+                </button>
+              </div>
+            }
           />
           <ModalInput
             inputLabel="Responsável"
