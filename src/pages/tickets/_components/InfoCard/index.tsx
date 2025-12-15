@@ -33,7 +33,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({ type, value = 0 }) => {
   const label = IconsData[type].label
 
   return (
-    <div className="bg-[linear-gradient(135deg,#1F2A44,#141C2F) flex w-full max-w-60 flex-col gap-8 rounded-2xl border-[1px] border-[#F6F8FC1A] p-6">
+    <div className="bg-[linear-gradient(135deg,#1F2A44,#141C2F) flex w-full flex-col gap-8 rounded-2xl border-[1px] border-[#F6F8FC1A] p-6">
       <span className="font-montserrat text-t1 text-white">{label}</span>
       <div className="flex flex-row items-center justify-between">
         <span className="text-t3 font-bold text-white">

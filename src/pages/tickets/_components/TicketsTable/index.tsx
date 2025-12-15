@@ -64,8 +64,8 @@ export function TicketsTable({ data }: { data: Ticket[] }) {
               </td>
 
               <td className="px-4 py-4">
-                <div className="font-semibold">{ticket.client}</div>
-                <div className="font-normal">{ticket.email}</div>
+                <div className="break-words font-semibold">{ticket.client}</div>
+                <div className="break-all font-normal">{ticket.email}</div>
               </td>
 
               <td className="px-4 py-4 font-semibold">{ticket.subject}</td>
@@ -87,15 +87,17 @@ export function TicketsTable({ data }: { data: Ticket[] }) {
 
               <td className="px-4 py-4 font-semibold">{ticket.responsible}</td>
 
-              <td className="flex flex-row items-center gap-1 px-4 py-4">
-                <button className="mr-3 flex flex-row items-center gap-2 text-[0.75rem] font-normal text-[#EFF6FF] hover:underline">
-                  Editar
-                  <PencilIcon />
-                </button>
-                <button className="flex flex-row items-center gap-2 text-[0.75rem] font-normal text-[#EFF6FF] hover:underline">
-                  Ver
-                  <ArrowRightIcon />
-                </button>
+              <td className="px-4 py-4">
+                <div className="flex h-full flex-row items-center gap-1">
+                  <button className="mr-3 flex flex-row items-center gap-2 text-[0.75rem] font-normal text-[#EFF6FF] hover:underline">
+                    Editar
+                    <PencilIcon />
+                  </button>
+                  <button className="flex flex-row items-center gap-2 text-[0.75rem] font-normal text-[#EFF6FF] hover:underline">
+                    Ver
+                    <ArrowRightIcon />
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

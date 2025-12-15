@@ -17,7 +17,7 @@ export const UserTopBar: React.FC<UserTopBarProps> = ({
   sectionTitle,
 }) => {
   return (
-    <div className="fixed flex h-[5.5rem] w-full flex-row items-center justify-between bg-[#20273E] pl-[11.875rem] pr-[2.7rem]">
+    <div className="fixed z-50 flex h-[5.5rem] w-full flex-row items-center justify-between bg-[#20273E] pl-[11.875rem] pr-[2.7rem]">
       <span className="text-s1 font-semibold text-[#F6F8FC]">
         {sectionTitle}
       </span>
