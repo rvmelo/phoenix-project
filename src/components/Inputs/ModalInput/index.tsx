@@ -28,13 +28,12 @@ export const ModalInput = React.forwardRef<HTMLInputElement, ModalInputProps>(
             }
             {...props}
           />
-
-          {error && (
-            <span className="font-weight-400 font-inter text-t1 text-error2">
-              {error}
-            </span>
-          )}
         </div>
+        {error && (
+          <span className="font-weight-400 ml-4 font-inter text-t1 text-error2">
+            {error}
+          </span>
+        )}
       </div>
     )
   },
