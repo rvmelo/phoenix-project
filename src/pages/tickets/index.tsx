@@ -27,12 +27,7 @@ export default function Tickets({
 
   return (
     <>
-      {isModalOpen && (
-        <TicketModal
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={() => undefined}
-        />
-      )}
+      {isModalOpen && <TicketModal onClose={() => setIsModalOpen(false)} />}
       <UserSideBar />
       <UserTopBar
         sectionTitle="Gestão de Tickets"

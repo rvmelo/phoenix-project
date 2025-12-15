@@ -7,6 +7,8 @@ import { z } from 'zod'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ModalInputForm } from '@/components/Inputs/ModalInput/form'
+import { toast } from 'sonner'
+import axios from 'axios'
 
 const ticketCreationSchema = z.object({
   client: z.string().min(1, 'Cliente é obrigatório'),
@@ -41,7 +43,15 @@ export const TicketModal: React.FC<TicketModalProps> = ({ onClose }) => {
 
   const onSubmit = async (data: TicketFormData) => {
     console.log(data)
-    onClose()
+
+    try {
+      await axios.post('/api/create-ticket', { ticketData: data })
+      toast.success('Ticket criado com sucesso')
+      onClose()
+    } catch (error) {
+      toast.error('Erro ao criar ticket')
+      onClose()
+    }
   }
 
   const [priority, setPriority] = useSafeState<
