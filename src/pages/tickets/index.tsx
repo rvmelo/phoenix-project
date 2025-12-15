@@ -30,7 +30,7 @@ export default function Tickets({
         <header className="h-[5.5rem] w-full"></header>
         <main className="flex flex-col items-center justify-center pb-8 pt-14">
           <div className="flex flex-col gap-10">
-            <div className="flex w-full flex-row justify-between">
+            <div className="flex w-full flex-row justify-between gap-6">
               <InfoCard type="ticket" value={openCount} />
               <InfoCard type="progress" value={progressCount} />
               <InfoCard type="solved" value={closedCount} />
