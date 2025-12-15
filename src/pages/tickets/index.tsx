@@ -5,6 +5,8 @@ import { GetServerSideProps } from 'next'
 import { getTicketsService, TicketItem } from '@/services/getTicketsService'
 import { parse } from 'cookie'
 import { TicketsTable } from './_components/TicketsTable'
+import { TicketModal } from './_components/TicketModal'
+import { useSafeState } from '../hooks/useSafeState'
 
 type TicketsPageProps = {
   openCount: number
@@ -21,10 +23,22 @@ export default function Tickets({
   averageDurationHours,
   tickets,
 }: TicketsPageProps) {
+  const [isModalOpen, setIsModalOpen] = useSafeState(false)
+
   return (
     <>
+      {isModalOpen && (
+        <TicketModal
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={() => undefined}
+        />
+      )}
       <UserSideBar />
-      <UserTopBar sectionTitle="Gestão de Tickets" buttonTitle="Novo Ticket" />
+      <UserTopBar
+        sectionTitle="Gestão de Tickets"
+        buttonTitle="Novo Ticket"
+        onClick={() => setIsModalOpen(true)}
+      />
       <div className="grid min-h-screen grid-cols-[9.375rem_1fr] grid-rows-[auto_1fr]">
         <aside className="row-span-2"></aside>
         <header className="h-[5.5rem] w-full"></header>
