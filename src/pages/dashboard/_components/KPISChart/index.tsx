@@ -23,8 +23,6 @@ export const KPISChart: React.FC<KPISChartProps> = ({ kpis }) => {
     KPIS_TRENDS_ENUM.ARPU,
   )
 
-  console.log(kpis)
-
   const data = {
     options: {
       chart: {
@@ -85,7 +83,7 @@ export const KPISChart: React.FC<KPISChartProps> = ({ kpis }) => {
           <div className="flex flex-row items-center gap-3 rounded-[6.25rem] bg-[#FFFFFF0D] px-3 py-2">
             <button
               className={customTwMerge(
-                'w-[5.2rem] rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
+                'flex w-[5.2rem] items-center justify-center rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
                 trend === KPIS_TRENDS_ENUM.RETENTION &&
                   'bg-[#2DB3C8] text-white',
               )}
@@ -95,7 +93,7 @@ export const KPISChart: React.FC<KPISChartProps> = ({ kpis }) => {
             </button>
             <button
               className={customTwMerge(
-                'w-[5.2rem] rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
+                'flex w-[5.2rem] items-center justify-center rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
                 trend === KPIS_TRENDS_ENUM.CONVERSION &&
                   'bg-[#2DB3C8] text-white',
               )}
@@ -105,7 +103,7 @@ export const KPISChart: React.FC<KPISChartProps> = ({ kpis }) => {
             </button>
             <button
               className={customTwMerge(
-                'w-[5.2rem] rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
+                'flex w-[5.2rem] items-center justify-center rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
                 trend === KPIS_TRENDS_ENUM.CHURN && 'bg-[#2DB3C8] text-white',
               )}
               onClick={() => setTrend(KPIS_TRENDS_ENUM.CHURN)}
@@ -114,7 +112,7 @@ export const KPISChart: React.FC<KPISChartProps> = ({ kpis }) => {
             </button>
             <button
               className={customTwMerge(
-                '   w-[5.2rem] rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
+                'flex w-[5.2rem] items-center justify-center rounded-[6.25rem] bg-[#F6F8FC1A] p-3 font-montserrat text-[0.75rem] font-semibold text-white',
                 trend === KPIS_TRENDS_ENUM.ARPU && 'bg-[#2DB3C8] text-white',
               )}
               onClick={() => setTrend(KPIS_TRENDS_ENUM.ARPU)}
