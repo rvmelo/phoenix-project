@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const defaultTheme = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -31,4 +32,83 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.custom-scroll': {
+          'scrollbar-width': 'thin',
+          'scrollbar-color': '#4a4f63 transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar': {
+          width: '6px',
+        },
+        '.custom-scroll::-webkit-scrollbar-button': {
+          display: 'none',
+          width: '0',
+          height: '0',
+          color: 'transparent',
+          background: 'transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar-button:single-button': {
+          display: 'none',
+          width: '0',
+          height: '0',
+          background: 'transparent',
+          color: 'transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar-button:single-button:vertical:decrement':
+          {
+            display: 'none',
+            width: '0',
+            height: '0',
+            background: 'transparent',
+            color: 'transparent',
+          },
+        '.custom-scroll::-webkit-scrollbar-button:single-button:vertical:increment':
+          {
+            display: 'none',
+            width: '0',
+            height: '0',
+            background: 'transparent',
+            color: 'transparent',
+          },
+        '.custom-scroll::-webkit-scrollbar-button:start:decrement': {
+          display: 'none',
+          width: '0',
+          height: '0',
+          background: 'transparent',
+          color: 'transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar-button:end:increment': {
+          display: 'none',
+          width: '0',
+          height: '0',
+          background: 'transparent',
+          color: 'transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar-button:vertical:start:decrement': {
+          display: 'none',
+          width: '0',
+          height: '0',
+          background: 'transparent',
+          color: 'transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar-button:vertical:end:increment': {
+          display: 'none',
+          width: '0',
+          height: '0',
+          background: 'transparent',
+          color: 'transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '.custom-scroll::-webkit-scrollbar-thumb': {
+          background: '#4a4f63',
+          'border-radius': '9999px',
+          margin: '10px 0',
+        },
+      })
+    }),
+  ],
 }

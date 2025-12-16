@@ -62,7 +62,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = parse(req.headers.cookie || '')
   const accessToken = cookies.access_token || ''
 
-  // Opcional: redirecionar se não estiver autenticado
   if (!accessToken) {
     return {
       redirect: { destination: '/login', permanent: false },
