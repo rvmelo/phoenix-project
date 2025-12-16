@@ -9,7 +9,7 @@ export const CustomPlans: React.FC = () => {
   >('basic')
 
   return (
-    <div className="w-full max-w-[53.25rem] rounded-3xl bg-[#FFFFFF0D] px-6 pb-[2.7rem] pt-20">
+    <div className="w-full max-w-[53.25rem] rounded-3xl border-[1px] border-[#FFFFFF1A] bg-[#FFFFFF0D] px-6 pb-[2.7rem] pt-20">
       <h2 className="font-montserrat text-s1 text-white">
         Planos Personalizados
       </h2>
