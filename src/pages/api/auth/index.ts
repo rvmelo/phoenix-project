@@ -2,6 +2,7 @@
 import { authService } from '@/services/authService'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { serialize } from 'cookie'
+import { getUsersByEmailService } from '@/services/getUserByEmailService'
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,6 +20,11 @@ export default async function handler(
 
   const { access_token } = await authService({ email, password })
 
+  const data = await getUsersByEmailService({
+    email,
+    accessToken: access_token,
+  })
+
   res.setHeader(
     'Set-Cookie',
     serialize('access_token', access_token, {
@@ -29,5 +35,5 @@ export default async function handler(
     }),
   )
 
-  return res.status(200).json({ message: 'Login successful' })
+  return res.status(200).json({ message: 'Login successful', user: data })
 }

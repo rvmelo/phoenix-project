@@ -42,8 +42,6 @@ export const TicketModal: React.FC<TicketModalProps> = ({ onClose }) => {
   } = methods
 
   const onSubmit = async (data: TicketFormData) => {
-    console.log(data)
-
     try {
       await axios.post('/api/create-ticket', { ticketData: data })
       toast.success('Ticket criado com sucesso')
