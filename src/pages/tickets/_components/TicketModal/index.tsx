@@ -22,11 +22,13 @@ const ticketCreationSchema = z.object({
 interface TicketModalProps {
   onClose: () => void
   selectedTicket?: TicketItem
+  onInvalidateQuery: () => void
 }
 
 export const TicketModal: React.FC<TicketModalProps> = ({
   onClose,
   selectedTicket,
+  onInvalidateQuery,
 }) => {
   type TicketFormData = z.infer<typeof ticketCreationSchema>
 
@@ -72,6 +74,8 @@ export const TicketModal: React.FC<TicketModalProps> = ({
         await axios.post('/api/create-ticket', { ticketData: data })
         toast.success('Ticket criado com sucesso')
       }
+
+      onInvalidateQuery()
 
       onClose()
     } catch (error) {
