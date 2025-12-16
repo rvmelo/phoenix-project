@@ -9,6 +9,8 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { StorageKeys } from '@/pages/enums/storageKeys'
 import { toast } from 'sonner'
+import { useUserStore } from '@/zustand-store/stores'
+import { IUserState } from '@/zustand-store/types'
 
 const loginSchema = z.object({
   email: z
@@ -22,6 +24,7 @@ const loginSchema = z.object({
 })
 
 export const LoginSection: React.FC = () => {
+  const setUser = useUserStore((state) => state.setUser)
   const [shouldRememberUser, setShouldRememberUser] = useSafeState(false)
 
   const router = useRouter()
@@ -44,7 +47,10 @@ export const LoginSection: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       if (data.email && data.password) {
-        await axios.post('/api/auth', data)
+        const {
+          data: { user },
+        } = await axios.post<{ user: IUserState }>('/api/auth', data)
+        setUser(user)
         toast.success('Login realizado com sucesso')
       }
 
