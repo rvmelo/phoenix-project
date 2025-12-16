@@ -31,10 +31,28 @@ export default function Tickets({
   tickets,
 }: TicketsPageProps) {
   const [isModalOpen, setIsModalOpen] = useSafeState(false)
+  const [selectedTicket, setSelectedTicket] = useSafeState<TicketItem | null>(
+    null,
+  )
+
+  const handleModalClose = () => {
+    setIsModalOpen(false)
+    setSelectedTicket(null)
+  }
+
+  const handleModalOpen = (ticket: TicketItem) => {
+    setIsModalOpen(true)
+    setSelectedTicket(ticket)
+  }
 
   return (
     <>
-      {isModalOpen && <TicketModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <TicketModal
+          onClose={handleModalClose}
+          selectedTicket={selectedTicket}
+        />
+      )}
       <UserSideBar />
       <UserTopBar
         sectionTitle="Gestão de Tickets"
@@ -85,7 +103,7 @@ export default function Tickets({
                   />
                 </div>
               </div>
-              <TicketsTable data={tickets} />
+              <TicketsTable data={tickets} handleModalOpen={handleModalOpen} />
               <div className="flex w-full flex-row items-center justify-end">
                 <div className="flex flex-row items-center gap-10">
                   <button>

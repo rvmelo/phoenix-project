@@ -2,18 +2,7 @@ import { customTwMerge } from '@/utils/customTwMerge'
 import { format, parseISO } from 'date-fns'
 import PencilIcon from '@/assets/svg/pencil-icon.svg'
 import ArrowRightIcon from '@/assets/svg/arrow-right-icon.svg'
-
-type Ticket = {
-  id: string
-  ticketId: string
-  priority: 'Urgente' | 'Média' | 'Baixa'
-  client: string
-  email: string
-  subject: string
-  status: 'Aberto' | 'Em andamento' | 'Fechado'
-  createdAt: string
-  responsible: string
-}
+import { TicketItem } from '@/services/getTicketsService'
 
 const priorityStyles = {
   Urgente: 'bg-error2 text-[0.75rem] text-white font-medium',
@@ -27,7 +16,12 @@ const statusStyles = {
   Fechado: 'bg-error2 text-[0.75rem] text-white font-medium',
 }
 
-export function TicketsTable({ data }: { data: Ticket[] }) {
+interface TicketsTableProps {
+  data: TicketItem[]
+  handleModalOpen: (ticket: TicketItem) => void
+}
+
+export function TicketsTable({ data, handleModalOpen }: TicketsTableProps) {
   return (
     <div className="rounded-2xl bg-[#23283A] p-6 ">
       <table className="w-full border-collapse text-sm">
@@ -89,7 +83,10 @@ export function TicketsTable({ data }: { data: Ticket[] }) {
 
               <td className="px-4 py-4">
                 <div className="flex h-full flex-row items-center gap-1">
-                  <button className="mr-3 flex flex-row items-center gap-2 text-[0.75rem] font-normal text-[#EFF6FF] hover:underline">
+                  <button
+                    onClick={() => handleModalOpen(ticket)}
+                    className="mr-3 flex flex-row items-center gap-2 text-[0.75rem] font-normal text-[#EFF6FF] hover:underline"
+                  >
                     Editar
                     <PencilIcon />
                   </button>

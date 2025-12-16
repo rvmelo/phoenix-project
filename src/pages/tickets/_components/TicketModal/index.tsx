@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CloseIcon from '@/assets/svg/close-icon.svg'
 import { Dropdown } from '@/components/DropDown'
 import { useSafeState } from '@/pages/hooks/useSafeState'
@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ModalInputForm } from '@/components/Inputs/ModalInput/form'
 import { toast } from 'sonner'
 import axios from 'axios'
+import { TicketItem } from '@/services/getTicketsService'
 
 const ticketCreationSchema = z.object({
   client: z.string().min(1, 'Cliente é obrigatório'),
@@ -20,9 +21,13 @@ const ticketCreationSchema = z.object({
 
 interface TicketModalProps {
   onClose: () => void
+  selectedTicket?: TicketItem
 }
 
-export const TicketModal: React.FC<TicketModalProps> = ({ onClose }) => {
+export const TicketModal: React.FC<TicketModalProps> = ({
+  onClose,
+  selectedTicket,
+}) => {
   type TicketFormData = z.infer<typeof ticketCreationSchema>
 
   const methods = useForm<TicketFormData>({
@@ -39,15 +44,38 @@ export const TicketModal: React.FC<TicketModalProps> = ({ onClose }) => {
     handleSubmit,
     formState: { isSubmitting, errors },
     control,
+    setValue,
+    reset,
   } = methods
+
+  useEffect(() => {
+    if (selectedTicket) {
+      setValue('client', selectedTicket.client)
+      setValue('email', selectedTicket.email)
+      setValue('priority', selectedTicket.priority)
+      setValue('responsible', selectedTicket.responsible)
+      setValue('subject', selectedTicket.subject)
+    } else {
+      reset()
+    }
+  }, [selectedTicket, setValue, reset])
 
   const onSubmit = async (data: TicketFormData) => {
     try {
-      await axios.post('/api/create-ticket', { ticketData: data })
-      toast.success('Ticket criado com sucesso')
+      if (selectedTicket) {
+        await axios.patch('/api/update-ticket', {
+          ticketData: data,
+          ticketId: selectedTicket?.id,
+        })
+        toast.success('Ticket atualizado com sucesso')
+      } else {
+        await axios.post('/api/create-ticket', { ticketData: data })
+        toast.success('Ticket criado com sucesso')
+      }
+
       onClose()
     } catch (error) {
-      toast.error('Erro ao criar ticket')
+      toast.error('Erro ao criar ou atualizar ticket')
       onClose()
     }
   }
