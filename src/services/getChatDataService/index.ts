@@ -6,7 +6,7 @@ export interface GetChatDataServiceResponseDTO {
     author: string
     content: string
     timestamp: string
-    type: 'user_message' | 'assistant_message'
+    type: 'user_message' | 'assistant_message' | 'assistant_message_received'
   }[]
   iaSuggestion: string
   futureSteps: {
