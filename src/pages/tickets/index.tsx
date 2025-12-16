@@ -7,6 +7,13 @@ import { parse } from 'cookie'
 import { TicketsTable } from './_components/TicketsTable'
 import { TicketModal } from './_components/TicketModal'
 import { useSafeState } from '../hooks/useSafeState'
+import { DefaultInput } from '@/components/Inputs/DefaultInput'
+import SearchIcon from '@/assets/svg/search-icon.svg'
+import DropdownIcon from '@/assets/svg/dropdown-arrow-icon.svg'
+import FirstPageIcon from '@/assets/svg/p-first-page.svg'
+import ChevronLeftIcon from '@/assets/svg/p-chevron-left.svg'
+import ChevronRightIcon from '@/assets/svg/p-chevron-right.svg'
+import LastPageIcon from '@/assets/svg/p-last-page.svg'
 
 type TicketsPageProps = {
   openCount: number
@@ -46,10 +53,56 @@ export default function Tickets({
               <InfoCard type="time" value={averageDurationHours} />
             </div>
             <div className="flex flex-col gap-4 rounded-3xl bg-[linear-gradient(135deg,#1F2A44,#141C2F)] px-4 pb-4 pt-10">
-              <h2 className="font-montserrat text-s1 text-white">
-                Lista de Tickets
-              </h2>
+              <div>
+                <h2 className="font-montserrat text-s1 text-white">
+                  Lista de Tickets
+                </h2>
+                <div className="mt-6 flex w-full flex-1 flex-row gap-2">
+                  <DefaultInput
+                    leftIcon={<SearchIcon />}
+                    placeholder="Buscar por ID, cliente ou assunto..."
+                    className=" h-[2.375rem] w-full max-w-[44.5rem] rounded-3xl border-none bg-background"
+                    inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
+                    inputWrapperClassName="w-full max-w-[44.5rem]"
+                  />
+                  <DefaultInput
+                    rightIcon={<DropdownIcon />}
+                    className="h-[2.375rem] w-[10.56rem] rounded-3xl border-none bg-background"
+                    placeholder="Todos os status"
+                    inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
+                  />
+                  <DefaultInput
+                    rightIcon={<DropdownIcon />}
+                    className="h-[2.375rem] w-[12.625rem] rounded-3xl border-none bg-background"
+                    placeholder="Todas as prioridades"
+                    inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
+                  />
+                  <DefaultInput
+                    rightIcon={<DropdownIcon />}
+                    className="h-[2.375rem] w-[13.47rem] rounded-3xl border-none bg-background"
+                    placeholder="Todos os responsáveis"
+                    inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
+                  />
+                </div>
+              </div>
               <TicketsTable data={tickets} />
+              <div className="flex w-full flex-row items-center justify-end">
+                <div className="flex flex-row items-center gap-10">
+                  <button>
+                    <FirstPageIcon />
+                  </button>
+                  <button>
+                    <ChevronLeftIcon />
+                  </button>
+                  <span className="font-grotesk text-t3">1 de 5</span>
+                  <button>
+                    <ChevronRightIcon />
+                  </button>
+                  <button>
+                    <LastPageIcon />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </main>
