@@ -11,6 +11,15 @@
 3. Criar um arquivo .env e preencher a variável de ambiente BASE_URL com 
 a url da api do Nortus. O arquivo .env.example exemplifica esse passo
 
+## Informações sobre o projeto
+
+- Repositório público no github: https://github.com/rvmelo/phoenix-project
+
+- Clickup para criação dos cards: https://app.clickup.com/90132856190/v/f/901315719013
+
+- Deploy em produção no vercel: https://phoenix-project-fbdwep6ms-rvmelos-projects.vercel.app
+
+
 ## Pacotes utilizados 
 
 ### tailwindcss
