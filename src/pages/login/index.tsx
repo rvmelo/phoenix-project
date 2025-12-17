@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSafeState } from '../hooks/useSafeState'
 import NextImage from 'next/image'
 import LoginBackground from '@/assets/images/login-bg.png'
-import { LoginSection } from './_components/LoginSection'
+import { LoginSection } from '../../components/LoginSection'
 
 export default function Login() {
   const [mounted, setMounted] = useSafeState(false)

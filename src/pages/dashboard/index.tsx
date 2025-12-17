@@ -6,20 +6,20 @@ import {
   getKPISService,
   type GetKPISServiceResponseDTO,
 } from '@/services/getKPISService'
-import { KPISChart } from './_components/KPISChart'
-import { ConversionRateChart } from './_components/ConversionRateChart'
 import dynamic from 'next/dynamic'
 import {
   getMapLocationsService,
   GetMapLocationsServiceResponseDTO,
 } from '@/services/getMapLocationsService'
+import { KPISChart } from '@/components/KPISChart'
+import { ConversionRateChart } from '@/components/ConversionRateChart'
 
 type MapLocationsComponentProps = {
   locations: GetMapLocationsServiceResponseDTO['data']['locations']
 }
 
 const MapLocations = dynamic<MapLocationsComponentProps>(
-  () => import('./_components/MapLocations').then((mod) => mod.MapLocations),
+  () => import('../../components/MapLocations').then((mod) => mod.MapLocations),
   { ssr: false },
 )
 

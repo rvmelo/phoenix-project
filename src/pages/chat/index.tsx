@@ -7,7 +7,7 @@ import {
   getChatDataService,
   GetChatDataServiceResponseDTO,
 } from '@/services/getChatDataService'
-import { ChatMessage } from './_components/ChatMessage'
+import { ChatMessage } from '../../components/ChatMessage'
 import { customTwMerge } from '@/utils/customTwMerge'
 
 type ChatPageProps = {
