@@ -23,7 +23,7 @@ interface TicketsTableProps {
 
 export function TicketsTable({ data, handleModalOpen }: TicketsTableProps) {
   return (
-    <div className="rounded-2xl bg-[#23283A] p-6 ">
+    <div className="max-w-[75rem] rounded-2xl bg-[#23283A] p-6 ">
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr className="border-b border-white/10">
@@ -67,7 +67,7 @@ export function TicketsTable({ data, handleModalOpen }: TicketsTableProps) {
               <td className="px-4 py-4">
                 <span
                   className={customTwMerge(
-                    'rounded-full px-3 py-1 text-xs font-semibold',
+                    'whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold',
                     statusStyles[ticket.status],
                   )}
                 >
