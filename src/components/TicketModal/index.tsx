@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import CloseIcon from '@/assets/svg/close-icon.svg'
 import { Dropdown } from '@/components/DropDown'
-import { useSafeState } from '@/pages/hooks/useSafeState'
+import { useSafeState } from '@/hooks/useSafeState'
 import DropdownArrowIcon from '@/assets/svg/dropdown-arrow-icon.svg'
 import { z } from 'zod'
 import { Controller, FormProvider, useForm } from 'react-hook-form'

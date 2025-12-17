@@ -1,6 +1,6 @@
 import React from 'react'
 import { GetKPISServiceResponseDTO } from '@/services/getKPISService'
-import { useSafeState } from '@/pages/hooks/useSafeState'
+import { useSafeState } from '@/hooks/useSafeState'
 import dynamic from 'next/dynamic'
 import type { ApexOptions } from 'apexcharts'
 import { customTwMerge } from '@/utils/customTwMerge'

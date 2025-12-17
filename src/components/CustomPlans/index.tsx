@@ -1,4 +1,4 @@
-import { useSafeState } from '@/pages/hooks/useSafeState'
+import { useSafeState } from '@/hooks/useSafeState'
 import { customTwMerge } from '@/utils/customTwMerge'
 import React from 'react'
 import { CustomSlider } from '../CustomSlider'

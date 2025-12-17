@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSafeState } from '../hooks/useSafeState'
+import { useSafeState } from '../../hooks/useSafeState'
 import NextImage from 'next/image'
 import LoginBackground from '@/assets/images/login-bg.png'
 import { LoginSection } from '../../components/LoginSection'

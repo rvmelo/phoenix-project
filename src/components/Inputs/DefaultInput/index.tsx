@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from 'react'
 import PasswordIcon from '@/assets/svg/password-icon.svg'
 import { customTwMerge } from '@/utils/customTwMerge'
-import { useSafeState } from '@/pages/hooks/useSafeState'
+import { useSafeState } from '@/hooks/useSafeState'
 
 export interface DefaultInputProps
   extends InputHTMLAttributes<HTMLInputElement> {
