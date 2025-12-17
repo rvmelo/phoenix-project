@@ -14,13 +14,33 @@ import ChevronRightIcon from '@/assets/svg/p-chevron-right.svg'
 import LastPageIcon from '@/assets/svg/p-last-page.svg'
 import { useGetTicketService } from '@/services/getTicketsClientService'
 import { useQueryClient } from '@tanstack/react-query'
+import { Dropdown } from '@/components/DropDown'
 
 const limit = 5
+const priorityOptions = [
+  { value: 'Urgente', label: 'Urgente' },
+  { value: 'Média', label: 'Média' },
+  { value: 'Baixa', label: 'Baixa' },
+  { value: null, label: 'Todos as prioridades' },
+]
+const statusOptions = [
+  { value: 'Aberto', label: 'Aberto' },
+  { value: 'Em andamento', label: 'Em andamento' },
+  { value: 'Fechado', label: 'Fechado' },
+  { value: null, label: 'Todos os status' },
+]
 
 export default function Tickets() {
   const [page, setPage] = useSafeState(1)
 
   const queryClient = useQueryClient()
+
+  const [priority, setPriority] = useSafeState<
+    'Urgente' | 'Média' | 'Baixa' | ''
+  >('')
+  const [status, setStatus] = useSafeState<
+    'Aberto' | 'Em andamento' | 'Fechado' | ''
+  >('')
 
   const {
     data: {
@@ -35,8 +55,8 @@ export default function Tickets() {
   } = useGetTicketService({
     limit,
     page,
-    status: 'Aberto',
-    priority: 'Urgente',
+    status,
+    priority,
   })
 
   const [isModalOpen, setIsModalOpen] = useSafeState(false)
@@ -56,7 +76,7 @@ export default function Tickets() {
 
   const onInvalidateQuery = () => {
     queryClient.invalidateQueries({
-      queryKey: ['/api/get-tickets', limit, page],
+      queryKey: ['/api/get-tickets', limit, page, status, priority],
     })
   }
 
@@ -101,20 +121,45 @@ export default function Tickets() {
                     inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
                     inputWrapperClassName="w-full max-w-[44.5rem]"
                   />
-                  <DefaultInput
-                    rightIcon={<DropdownIcon />}
-                    className="h-[2.375rem] w-[10.56rem] rounded-3xl border-none bg-background"
-                    placeholder="Todos os status"
-                    inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
+                  <Dropdown
+                    options={priorityOptions}
+                    value={priority}
+                    setValue={(value) =>
+                      setPriority(value as 'Urgente' | 'Média' | 'Baixa')
+                    }
+                    dropDownContentPosition="popper"
+                    trigger={
+                      <DefaultInput
+                        rightIcon={<DropdownIcon />}
+                        disabled={true}
+                        inputWrapperClassName="cursor-pointer z-[9999]"
+                        className="h-[2.375rem] w-[10.56rem] rounded-3xl border-none bg-background"
+                        placeholder={priority || 'Todos os status'}
+                        inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
+                      />
+                    }
+                  />
+                  <Dropdown
+                    options={statusOptions}
+                    value={status}
+                    setValue={(value) =>
+                      setStatus(value as 'Aberto' | 'Em andamento' | 'Fechado')
+                    }
+                    dropDownContentPosition="popper"
+                    trigger={
+                      <DefaultInput
+                        rightIcon={<DropdownIcon />}
+                        disabled={true}
+                        inputWrapperClassName="cursor-pointer z-[9999]"
+                        className="h-[2.375rem] w-[12.625rem] rounded-3xl border-none bg-background"
+                        placeholder={status || 'Todos os status'}
+                        inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
+                      />
+                    }
                   />
                   <DefaultInput
                     rightIcon={<DropdownIcon />}
-                    className="h-[2.375rem] w-[12.625rem] rounded-3xl border-none bg-background"
-                    placeholder="Todas as prioridades"
-                    inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
-                  />
-                  <DefaultInput
-                    rightIcon={<DropdownIcon />}
+                    disabled={true}
                     className="h-[2.375rem] w-[13.47rem] rounded-3xl border-none bg-background"
                     placeholder="Todos os responsáveis"
                     inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"

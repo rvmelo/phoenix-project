@@ -17,8 +17,8 @@ export type TicketItem = {
 interface IGetTicketsRequestDTO {
   page: number
   limit: number
-  status: 'Aberto' | 'Em andamento' | 'Fechado'
-  priority: 'Urgente' | 'Média' | 'Baixa'
+  status: 'Aberto' | 'Em andamento' | 'Fechado' | ''
+  priority: 'Urgente' | 'Média' | 'Baixa' | ''
 }
 
 interface GetTicketsResponseDTO {

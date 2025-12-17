@@ -54,8 +54,22 @@ export default async function handler(
 
   const skip = (pageNumber - 1) * limitNumber
 
+  const filteredTickets = tickets.filter((t) => {
+    if (status && priority && status !== null && priority !== null) {
+      return t.status === status && t.priority === priority
+    }
+
+    if (status && status !== null) {
+      return t.status === status
+    }
+    if (priority && priority !== null) {
+      return t.priority === priority
+    }
+    return true
+  })
+
   const data = {
-    tickets: tickets.slice(skip, skip + limitNumber),
+    tickets: filteredTickets.slice(skip, skip + limitNumber),
     lastPage: Math.ceil(tickets.length / 5),
     openCount,
     progressCount,
