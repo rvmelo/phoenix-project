@@ -15,6 +15,7 @@ import LastPageIcon from '@/assets/svg/p-last-page.svg'
 import { useGetTicketService } from '@/services/getTicketsClientService'
 import { useQueryClient } from '@tanstack/react-query'
 import { Dropdown } from '@/components/DropDown'
+import { SkeletonEmptyScreen } from '@/components/SkeletonEmptyScreen'
 
 const limit = 5
 const priorityOptions = [
@@ -80,7 +81,9 @@ export default function Tickets() {
     })
   }
 
-  if (isFetching) return null
+  if (isFetching) {
+    return <SkeletonEmptyScreen sectionName="Gestão de Tickets" />
+  }
 
   return (
     <>
@@ -132,7 +135,7 @@ export default function Tickets() {
                       <DefaultInput
                         rightIcon={<DropdownIcon />}
                         disabled={true}
-                        inputWrapperClassName="cursor-pointer z-[9999]"
+                        inputWrapperClassName="cursor-pointer"
                         className="h-[2.375rem] w-[10.56rem] rounded-3xl border-none bg-background"
                         placeholder={priority || 'Todos os status'}
                         inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
@@ -150,7 +153,7 @@ export default function Tickets() {
                       <DefaultInput
                         rightIcon={<DropdownIcon />}
                         disabled={true}
-                        inputWrapperClassName="cursor-pointer z-[9999]"
+                        inputWrapperClassName="cursor-pointer"
                         className="h-[2.375rem] w-[12.625rem] rounded-3xl border-none bg-background"
                         placeholder={status || 'Todos os status'}
                         inputClassName="placeholder:text-t1 placeholder:text-[#F6F8FC]"
