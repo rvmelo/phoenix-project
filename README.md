@@ -1,34 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Começar
 
-## Getting Started
+1. Instalar dependências
 
-First, run the development server:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+2. Utilizar a versão 18.20.5 do node, conforme é mostrado no arquivo .nvmrc
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Criar um arquivo .env e preencher a variável de ambiente BASE_URL com 
+a url da api do Nortus. O arquivo .env.example exemplifica esse passo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Pacotes utilizados 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### tailwindcss
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Para gerar toda a estilização. Esse pacote foi instalado como dependência de
+desenvolvimento porque toda sua estilização é gerada em tempo de build
 
-## Learn More
+### tailwind-merge
 
-To learn more about Next.js, take a look at the following resources:
+Pacote utilizado para evitar conflitos entre classes mutuamente exclusivas. Esse
+pacote foi muito utilizado nos componentes de input, que foram reutilizados em
+mais de uma tela.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### React Hook Form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Foi utilizado em componentes de input não controlados, para evitar renderizações
+desnecessárias. Enquanto o zod foi utilizado para validação de esquemas
 
-## Deploy on Vercel
+### React Query
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Esse pacote foi utilizado na tela de gestão de tickets, para cachear os resultados
+das requisições ao backend. Melhorando assim, o desempenho da listagem, paginação e filtragem dos dados da lista de tickets
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Zustand
+
+Esse pacote tem a função de ajudar a implementar o estado global da aplicação. Nesse
+projeto, ele armazenou dados do usuário logado. Na barra lateral, logo após o usuário
+logar, é possível verificar as duas iniciais do seu nome. Esses dados são recuperados
+do estado global da aplicação
+
+## Componentes Reutilizáveis
+
+### Inputs
+
+Os inputs foram implementados em duas versões. Uma que já vêm integrada com o
+react hook form, para recuperar os seus métodos a partir de um contexto. E outra
+versão mais simples, sem o react hook form.
+
+### Skeleton
+
+Também foi implementado o Skeleton para feedback visual, enquanto os dados da
+tabela de tickets estão carregando
+
+## Ferramentas de IA
+
+### Cursor
+
+Para esse projeto foi utilizado o Cursor, em conjunto com o chat gpt na versão
+5.1
+
+### Forma de utilização
+
+A IA foi utiliza para ajudar na resolução de bugs, para agilizar na escrita de
+pequenos trechos de código, que logo em seguida eram resvisados. E também na 
+configuraçao de certos pacotes
+
+### Exemplos de prompt
+
+**User**
+
+E @src/pages/tickets/index.tsx:44 de acordo com o tipo de array que tickets é composto, eu preciso que vc me retorne o número de tickets com os estados de 'Aberto', 'Fechado' e 'Em andamento'
+
+**User**
+
+me passe os passos para configurar svg no next12
+
+**User**
+
+@package.json:17-19 essas versões estão compatíveis com o next na versão 12 e react e react dom na versao 18?
